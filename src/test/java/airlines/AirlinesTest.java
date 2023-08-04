@@ -15,10 +15,11 @@ public class AirlinesTest {
     @Test
     public void createAirline() throws IOException {
 
+        System.out.println(System.getProperty("env")+"ENV value");
         String env=System.getProperty("env")==null ? "qa" : System.getProperty("env");
         Map<String,String> data= JsonUtils.getJsonDataAsMap("airlines/"+env+"/airlinesApiData.json");
         String endpoint=data.get("createAirlineEndpoint");
-        Map<String, Object> payload=Payloads.getPayloadsfromMap("12222232","ABC name","ABC country",
+        Map<String, Object> payload=Payloads.getPayloadsfromMap("12222236 ","ABC name","ABC country",
                 "ABC logo","ABC slogan", "ABC head_quarters","ABC Website","ABC established");
 
         Response response= RestUtils.performPayload(endpoint,payload,new HashMap<>());
