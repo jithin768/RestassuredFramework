@@ -1,28 +1,26 @@
 package airlines;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
+import restUtils.RestUtils;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.JsonUtils;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AirlinesTest {
 
     @Test
-    public void createAirline(){
+    public void createAirline() throws IOException {
 
-         Response response= RestAssured.given().log().all()
-                .baseUri("https://api.instantwebtools.net/v1/airlines")
-                .contentType(ContentType.JSON)
-                .body("{\n" +
-                        "        \"id\": 122223,\n" +
-                        "        \"name\": \"Quatar Airways\",\n" +
-                        "        \"country\": \"Quatar\",\n" +
-                        "        \"logo\": \"https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Qatar_Airways_Logo.svg/300px-Qatar_Airways_Logo.svg.png\",\n" +
-                        "        \"slogan\": \"Going Places Together\",\n" +
-                        "        \"head_quaters\": \"Qatar Airways Towers, Doha, Qatar\",\n" +
-                        "        \"website\": \"www.qatarairways.com\",\n" +
-                        "        \"established\": \"1994\"\n"+"}").post().then().log().all().extract().response();
+        Map<String,String> data= JsonUtils.getJsonDataAsMap("airlines/qa/airlinesApiData.json");
+        String endpoint=data.get("createAirlineEndpoint");
+        Map<String, Object> payload=Payloads.getPayloadsfromMap("12222231","ABC name","ABC country",
+                "ABC logo","ABC slogan", "ABC head_quarters","ABC Website","ABC established");
+
+        Response response= RestUtils.performPayload(endpoint,payload,new HashMap<>());
 
         Assert.assertEquals(response.statusCode(),200);
     }
