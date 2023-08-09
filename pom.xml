@@ -33,7 +33,7 @@
         <jacksonVersion>2.15.2</jacksonVersion>
         <gsonVersion>2.10.1</gsonVersion>
         <extentreportsVersion>5.0.9</extentreportsVersion>
-        <javafakerVersion>1.0.2</javafakerVersion>
+        <javadatafakerVersion>2.0.1</javadatafakerVersion>
         <lombokVersion>1.18.28</lombokVersion>
         <apachecommonsVersion>3.13.0</apachecommonsVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -70,11 +70,11 @@
             <artifactId>extentreports</artifactId>
             <version>${extentreportsVersion}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
+
         <dependency>
-            <groupId>com.github.javafaker</groupId>
-            <artifactId>javafaker</artifactId>
-            <version>${javafakerVersion}</version>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>${javadatafakerVersion}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
