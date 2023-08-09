@@ -39,7 +39,13 @@ public class Setup implements ITestListener {
         ExtentReportManager.logFailDetails(result.getThrowable().getMessage());
 
         String stackTrace=Arrays.toString(result.getThrowable().getStackTrace());
-        ExtentReportManager.logFailDetails(stackTrace);
+        stackTrace=stackTrace.replaceAll(",","<br>");
+        String formattedTrace="<details>\n" +
+                "  <summary>Click Here To See Exception Logs</summary>\n" +
+                "  "+stackTrace+"\n" +
+                "</details>";
+
+        ExtentReportManager.logStackTrace(formattedTrace);
 
 
     }
