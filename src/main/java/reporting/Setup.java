@@ -9,26 +9,33 @@ import org.testng.ITestResult;
 public class Setup implements ITestListener {
 
     private static ExtentReports extentReports;
-    public static ThreadLocal<ExtentTest> extentTest=new ThreadLocal<>();
-    public static String name="Jithin";
+    public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
+    public static String name = "Jithin";
 
 
     public void onStart(ITestContext context) {
-        String fileName=ExtentReportManager.getReportNameWithTimeStamp();
-        String fullReportPath=System.getProperty("user.dir")+"\\reports\\"+fileName;
-        extentReports=ExtentReportManager.createInstance(fileName,"Test API Automation Report", "Test execution Report");
+        String fileName = ExtentReportManager.getReportNameWithTimeStamp();
+        String fullReportPath = System.getProperty("user.dir") + "\\reports\\" + fileName;
+        extentReports = ExtentReportManager.createInstance(fileName, "Test API Automation Report", "Test execution Report");
 
     }
 
     public void onFinish(ITestContext context) {
 
-        if(extentReports!=null)
+        if (extentReports != null)
             extentReports.flush();
 
     }
+
     public void onTestStart(ITestResult result) {
-        ExtentTest test= extentReports.createTest("Test Name "+result.getTestClass().getName()+" - " +result.getMethod().getMethodName());
+        ExtentTest test = extentReports.createTest("Test Name " + result.getTestClass().getName() + " - " + result.getMethod().getMethodName());
         extentTest.set(test);
+
+    }
+
+    public void onTestFailure(ITestResult result) {
+        ExtentReportManager.logFailDetails(result.getThrowable().getMessage());
+
 
     }
 }

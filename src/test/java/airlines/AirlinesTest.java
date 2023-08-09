@@ -19,7 +19,7 @@ public class AirlinesTest extends AirlineAPIs{
         String env=System.getProperty("env")==null ? "qa" : System.getProperty("env");
         Map<String,Object> data= JsonUtils.getJsonDataAsMap("airlines/"+env+"/airlinesApiData.json");
         String endpoint=data.get("createAirlineEndpoint");*/
-        Map<String, Object> payload=Payloads.getPayloadsfromMap("12222240 ","ABC name","ABC country",
+        Map<String, Object> payload=Payloads.getPayloadsfromMap("12222248 ","ABC name","ABC country",
                 "ABC logo","ABC slogan", "ABC head_quarters","ABC Website","ABC established");
 
         //Response response= RestUtils.performPayloadPost(endpoint,payload,new HashMap<>());
