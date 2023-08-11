@@ -1,5 +1,6 @@
 package airlines;
 
+import airlines.pojos.Airline;
 import restUtils.RestUtils;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -19,7 +20,7 @@ public class AirlinesTest extends AirlineAPIs{
         String env=System.getProperty("env")==null ? "qa" : System.getProperty("env");
         Map<String,Object> data= JsonUtils.getJsonDataAsMap("airlines/"+env+"/airlinesApiData.json");
         String endpoint=data.get("createAirlineEndpoint");*/
-        Map<String, Object> payload=Payloads.getPayloadsfromMap();
+        Airline payload=Payloads.getPayloadsfromPojos();
 
         //Response response= RestUtils.performPayloadPost(endpoint,payload,new HashMap<>());
 

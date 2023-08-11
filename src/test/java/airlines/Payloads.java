@@ -1,7 +1,11 @@
 package airlines;
 
+import airlines.pojos.Airline;
 import net.datafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
+import utils.DateUtils;
+import utils.RandomDataGenerator;
+import utils.RandomDataTypeNames;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,16 +32,31 @@ public class Payloads {
     public static Map<String, Object> getPayloadsfromMap(){
 
         Map<String,Object> payload=new HashMap<>();
-        Faker faker=new Faker();
-        payload.put("id",faker.number().digits(10));
-        payload.put("name",faker.name().firstName());
-        payload.put("country",faker.address().country());
-        payload.put("logo", RandomStringUtils.randomAlphabetic(25));
-        payload.put("slogan",RandomStringUtils.randomAlphabetic(25));
-        payload.put("head_quaters",faker.address().city());
+        //Faker faker=new Faker();
+        payload.put("id",RandomDataGenerator.getRandomNumber(10));
+        payload.put("name", RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FULLNAME));
+        payload.put("country",RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.COUNTRY));
+        payload.put("logo", RandomDataGenerator.getAlphabets(10));
+        payload.put("slogan",RandomDataGenerator.getAlphabets(10));
+        payload.put("head_quaters",RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.CITYNAME));
         payload.put("website","http://"+RandomStringUtils.randomAlphabetic(10)+".com");
-        payload.put("established",faker.number().numberBetween(1900,2020));
+        payload.put("established",RandomDataGenerator.getnumberBetween(1900, DateUtils.getCurrentYear()));
 
         return payload;
+    }
+
+
+    public static Airline getPayloadsfromPojos(){
+
+        return Airline.builder()
+                .id(Integer.parseInt(RandomDataGenerator.getRandomNumber(6)))
+                .name(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FULLNAME))
+                .country(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.COUNTRY))
+                .logo(RandomDataGenerator.getAlphabets(10))
+                .Slogan(RandomDataGenerator.getAlphabets(10))
+                .head_quaters(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.CITYNAME))
+                .website("http://"+RandomStringUtils.randomAlphabetic(10)+".com")
+                .established(String.valueOf(RandomDataGenerator.getnumberBetween(1900, DateUtils.getCurrentYear()))).build();
+
     }
 }

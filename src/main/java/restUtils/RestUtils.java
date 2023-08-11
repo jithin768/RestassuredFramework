@@ -13,7 +13,7 @@ import java.util.Map;
 public class RestUtils {
 
 
-    private static RequestSpecification getRequestSpecification(String endPoint, Map<String,Object> requestPayload, Map<String,String>headers){
+    private static RequestSpecification getRequestSpecification(String endPoint, Object requestPayload, Map<String,String>headers){
         return RestAssured.given()
                 .baseUri(endPoint)
                 .headers(headers)
@@ -34,6 +34,21 @@ public class RestUtils {
                 .contentType(ContentType.JSON)
                 .body(requestPayload).post().then().log().all().extract().response();*/
     }
+
+    public static Response performPayloadPost(String endPoint,Object requestPayloadAsPojo, Map<String,String>headers){
+
+        RequestSpecification requestSpecification=getRequestSpecification(endPoint, requestPayloadAsPojo, headers);
+        Response response=requestSpecification.post();
+        printRequestLogInReport(requestSpecification);
+        printResponseLogInReport(response);
+        return response;
+       /* return RestAssured.given().log().all()
+                .baseUri(endPoint)
+                .headers(headers)
+                .contentType(ContentType.JSON)
+                .body(requestPayload).post().then().log().all().extract().response();*/
+    }
+
 
     private static void printRequestLogInReport(RequestSpecification requestSpecification){
         QueryableRequestSpecification queryableRequestSpecification= SpecificationQuerier.query(requestSpecification);
