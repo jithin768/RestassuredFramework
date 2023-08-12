@@ -14,6 +14,7 @@ public class StudentApp {
         System.out.println(student.getCity());
         student.setState("Kerala");
         System.out.println(student.getState());
+        System.out.println("Test Git Pull");
 
     }
 }
