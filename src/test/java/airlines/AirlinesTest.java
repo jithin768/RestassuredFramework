@@ -20,9 +20,11 @@ public class AirlinesTest extends AirlineAPIs{
         String env=System.getProperty("env")==null ? "qa" : System.getProperty("env");
         Map<String,Object> data= JsonUtils.getJsonDataAsMap("airlines/"+env+"/airlinesApiData.json");
         String endpoint=data.get("createAirlineEndpoint");*/
-        Airline payload=Payloads.getPayloadsfromPojos();
 
+        //Airline payload=Payloads.getPayloadsfromPojos();
+        /*Airline payload=new Airline();*/
         //Response response= RestUtils.performPayloadPost(endpoint,payload,new HashMap<>());
+        Airline payload=new Airline().toBuilder().name("jithin").build();
 
         Response response=createAirline(payload);
         Assert.assertEquals(response.statusCode(),200);

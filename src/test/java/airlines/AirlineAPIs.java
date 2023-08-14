@@ -21,4 +21,5 @@ public class AirlineAPIs {
         String endpoint= (String) Base.dataFromJsonFile.get("createAirlineEndpoint");
         return RestUtils.performPayloadPost(endpoint,createAirlinePayload,new HashMap<>());
     }
+
 }
